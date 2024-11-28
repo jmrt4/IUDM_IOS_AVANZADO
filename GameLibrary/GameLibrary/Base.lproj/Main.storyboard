@@ -19,8 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-3Q-QBO">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-3Q-QBO">
                                 <rect key="frame" x="0.0" y="159" width="393" height="659"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NMw-yQ-NEh">
                                     <size key="itemSize" width="128" height="128"/>
@@ -65,31 +66,14 @@
                                     <segue destination="jac-6z-lh3" kind="show" id="WRc-Zt-oZD"/>
                                 </connections>
                             </button>
-                            <searchBar clipsSubviews="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="GZj-51-b6Y">
-                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="91O-mT-ej9"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4kL-4c-jNA"/>
-                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="top" secondItem="GZj-51-b6Y" secondAttribute="bottom" id="7FL-BF-Lup"/>
-                            <constraint firstItem="GZj-51-b6Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FEN-0L-sJk"/>
-                            <constraint firstItem="GZj-51-b6Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bFl-uY-Mq0"/>
-                            <constraint firstItem="GZj-51-b6Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="i9y-bz-esF"/>
-                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="trailing" secondItem="GZj-51-b6Y" secondAttribute="trailing" id="n00-9o-jpe"/>
-                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="leading" secondItem="GZj-51-b6Y" secondAttribute="leading" id="sql-Yu-LZi"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zg4-cX-uyJ"/>
                     <connections>
                         <outlet property="addGameButton" destination="kiF-4X-C6r" id="ZEx-58-J3K"/>
                         <outlet property="collectionView" destination="DIu-3Q-QBO" id="kWB-Dt-Ay6"/>
-                        <outlet property="searchBar" destination="GZj-51-b6Y" id="5S5-Rk-JEp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -129,7 +113,8 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ora-S4-woI">
                                 <rect key="frame" x="20" y="635" width="353" height="30"/>
-                                <menu key="menu" id="Rl2-YN-sYp">
+                                <menu key="menu" title="Estado" id="Rl2-YN-sYp">
+                                    <menuOptions key="menuOptions" singleSelection="YES"/>
                                     <children>
                                         <command title="Item 1" id="cU6-f3-aOt"/>
                                         <command title="Item 2" id="mQo-j2-x10"/>
@@ -141,6 +126,9 @@
                                 <rect key="frame" x="144" y="733.66666666666663" width="105" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Añadir"/>
+                                <connections>
+                                    <action selector="addNewGame:" destination="jac-6z-lh3" eventType="touchUpInside" id="83H-Ia-zAR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XzW-5B-iDv"/>
@@ -170,6 +158,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CHD-YE-Bzb"/>
+                    <connections>
+                        <outlet property="categoryGame" destination="7ac-9d-SNK" id="DUW-zI-GxA"/>
+                        <outlet property="imageCover" destination="1Uw-5v-ye2" id="Igq-RY-GZi"/>
+                        <outlet property="statusSelector" destination="ora-S4-woI" id="PqF-rj-5V2"/>
+                        <outlet property="textDescription" destination="oxh-Ja-UJT" id="UEe-Pr-jV3"/>
+                        <outlet property="textDeveloper" destination="Xpc-6I-dwJ" id="TYQ-tm-6m8"/>
+                        <outlet property="textGame" destination="5Wy-0c-utE" id="Zq8-mc-EIR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FE1-qQ-nqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

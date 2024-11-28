@@ -6,23 +6,26 @@
 //
 
 import UIKit
+import Foundation
 
-enum Category {
-    case ACTION
-    case ADVENTURE
-    case SHOOTER
-    case SPORTS
-    case SURVIVAL
+enum Category: String, CaseIterable {
+    case Accion
+    case Aventura
+    case Disparos
+    case Deportes
+    case Supervivencia
+    case Casual
+    case Simulacion
+    case SandBox
 }
 
-class Game {
-    let id = UUID()
-    var title: String
-    var coverImage: String
-    var description: String
-    var developer: String
-    var status: String
-    var category: Category
+class Game: Codable {
+    let title: String
+    let coverImage: String
+    let description: String
+    let developer: String
+    let status: String
+    let category: String
     
     init(title: String, coverImage: String, description: String, developer: String, status: String, category: Category) {
         self.title = title
@@ -30,6 +33,31 @@ class Game {
         self.description = description
         self.developer = developer
         self.status = status
-        self.category = category
+        self.category = category.rawValue
     }
+}
+
+class GameManager {
+    private let gamesKey = "uniqueKey"
+    
+    func saveGames(_ games: [Game]) {
+        let encoder = JSONEncoder()
+        if let encodedData = try? encoder.encode(games) {
+            UserDefaults.standard.set(encodedData, forKey: gamesKey)
+        }
+    }
+    
+    func loadGames() -> [Game] {
+        guard let savedData = UserDefaults.standard.data(forKey: gamesKey) else {
+            return []
+        }
+        
+        let decoder = JSONDecoder()
+        if let decodedGames = try? decoder.decode([Game].self, from: savedData) {
+            return decodedGames
+        }
+        
+        return []
+    }
+    
 }

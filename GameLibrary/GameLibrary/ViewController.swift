@@ -13,22 +13,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet var addGameButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
     
-    var games: [Game] = [
-        Game(title: "prueba1", coverImage: "", description: "descripcion1", developer: "nombre1", status: "Pendientes", category: Category.ACTION),
-        Game(title: "prueba2", coverImage: "", description: "descripcion2", developer: "nombre2", status: "Jugando", category: Category.ADVENTURE),
-        Game(title: "prueba3", coverImage: "", description: "descripcion3", developer: "nombre3", status: "Completados", category: Category.SHOOTER),
-        Game(title: "prueba4", coverImage: "", description: "descripcion3", developer: "nombre3", status: "Pendientes", category: Category.SHOOTER),
-        Game(title: "prueba5", coverImage: "", description: "descripcion3", developer: "nombre3", status: "Pendientes", category: Category.SHOOTER),
-        Game(title: "prueba6", coverImage: "", description: "descripcion3", developer: "nombre3", status: "Pendientes", category: Category.SHOOTER),
-        Game(title: "prueba7", coverImage: "", description: "descripcion3", developer: "nombre3", status: "Pendientes", category: Category.SHOOTER),
-        Game(title: "prueba8", coverImage: "", description: "descripcion3", developer: "nombre3", status: "Pendientes", category: Category.SHOOTER),
-        Game(title: "prueba9", coverImage: "", description: "descripcion3", developer: "nombre3", status: "Pendientes", category: Category.SHOOTER)
-    ]
+    var games: [Game] = []
+    
+    private let gameManager = GameManager()
     
     let status = ["Pendientes", "Jugando", "Completados"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        games = gameManager.loadGames()
         setupUI()
         addGameButton.layer.cornerRadius = addGameButton.frame.size.width / 2
         view.bringSubviewToFront(addGameButton)
@@ -86,5 +79,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         return headerView
     }
+    
+    func addGame(_ game: Game) {
+        games.append(game)
+        gameManager.saveGames(games)
+        collectionView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
 }
 
