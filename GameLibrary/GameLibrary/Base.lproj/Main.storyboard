@@ -3,8 +3,10 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-3Q-QBO">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NMw-yQ-NEh">
                                     <size key="itemSize" width="128" height="128"/>
@@ -53,24 +55,125 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kiF-4X-C6r">
+                                <rect key="frame" x="305" y="743" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonConfiguration key="configuration" style="filled" imagePlacement="top">
+                                    <imageReference key="image" image="plus" catalog="system" variableValue="0.0"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="jac-6z-lh3" kind="show" id="WRc-Zt-oZD"/>
+                                </connections>
+                            </button>
+                            <searchBar clipsSubviews="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="GZj-51-b6Y">
+                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="91O-mT-ej9"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DIu-3Q-QBO" secondAttribute="trailing" id="8t3-7V-R7e"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DIu-3Q-QBO" secondAttribute="bottom" id="mpv-13-Qra"/>
-                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="t7j-KN-CcN"/>
-                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ydV-FM-xKc"/>
+                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4kL-4c-jNA"/>
+                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="top" secondItem="GZj-51-b6Y" secondAttribute="bottom" id="7FL-BF-Lup"/>
+                            <constraint firstItem="GZj-51-b6Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FEN-0L-sJk"/>
+                            <constraint firstItem="GZj-51-b6Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bFl-uY-Mq0"/>
+                            <constraint firstItem="GZj-51-b6Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="i9y-bz-esF"/>
+                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="trailing" secondItem="GZj-51-b6Y" secondAttribute="trailing" id="n00-9o-jpe"/>
+                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="leading" secondItem="GZj-51-b6Y" secondAttribute="leading" id="sql-Yu-LZi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zg4-cX-uyJ"/>
                     <connections>
+                        <outlet property="addGameButton" destination="kiF-4X-C6r" id="ZEx-58-J3K"/>
                         <outlet property="collectionView" destination="DIu-3Q-QBO" id="kWB-Dt-Ay6"/>
+                        <outlet property="searchBar" destination="GZj-51-b6Y" id="5S5-Rk-JEp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="991.60305343511448" y="-34.507042253521128"/>
+        </scene>
+        <!--Add Game View Controller-->
+        <scene sceneID="kc3-rO-IJR">
+            <objects>
+                <viewController id="jac-6z-lh3" customClass="AddGameViewController" customModule="GameLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WQy-Ot-AAT">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titulo del Juego" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Wy-0c-utE">
+                                <rect key="frame" x="20" y="133" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Desarrolladora" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-6I-dwJ">
+                                <rect key="frame" x="20" y="197" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Portada (URL)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Uw-5v-ye2">
+                                <rect key="frame" x="20" y="261" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Descripcion" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oxh-Ja-UJT">
+                                <rect key="frame" x="20" y="325" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ac-9d-SNK">
+                                <rect key="frame" x="20" y="389" width="353" height="216"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ora-S4-woI">
+                                <rect key="frame" x="20" y="635" width="353" height="30"/>
+                                <menu key="menu" id="Rl2-YN-sYp">
+                                    <children>
+                                        <command title="Item 1" id="cU6-f3-aOt"/>
+                                        <command title="Item 2" id="mQo-j2-x10"/>
+                                    </children>
+                                </menu>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ab4-Ea-Qm4">
+                                <rect key="frame" x="144" y="733.66666666666663" width="105" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Añadir"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XzW-5B-iDv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="trailing" secondItem="Ab4-Ea-Qm4" secondAttribute="trailing" constant="144" id="0LX-BD-de5"/>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="trailing" secondItem="5Wy-0c-utE" secondAttribute="trailing" constant="20" id="2eM-YZ-hSR"/>
+                            <constraint firstItem="ora-S4-woI" firstAttribute="leading" secondItem="XzW-5B-iDv" secondAttribute="leading" constant="20" id="8lx-GN-HMK"/>
+                            <constraint firstItem="oxh-Ja-UJT" firstAttribute="leading" secondItem="XzW-5B-iDv" secondAttribute="leading" constant="20" id="Ehh-2f-hBz"/>
+                            <constraint firstItem="ora-S4-woI" firstAttribute="top" secondItem="7ac-9d-SNK" secondAttribute="bottom" constant="30" id="Fkv-RI-WKl"/>
+                            <constraint firstItem="7ac-9d-SNK" firstAttribute="leading" secondItem="XzW-5B-iDv" secondAttribute="leading" constant="20" id="HwV-2Q-QMb"/>
+                            <constraint firstItem="Xpc-6I-dwJ" firstAttribute="top" secondItem="5Wy-0c-utE" secondAttribute="bottom" constant="30" id="KNV-83-QOu"/>
+                            <constraint firstItem="1Uw-5v-ye2" firstAttribute="leading" secondItem="XzW-5B-iDv" secondAttribute="leading" constant="20" id="MXE-Vi-Ngg"/>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="trailing" secondItem="Xpc-6I-dwJ" secondAttribute="trailing" constant="20" id="Mx3-6S-cl6"/>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="bottom" secondItem="Ab4-Ea-Qm4" secondAttribute="bottom" constant="50" id="ToD-d0-8wt"/>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="trailing" secondItem="oxh-Ja-UJT" secondAttribute="trailing" constant="20" id="VZz-uf-H0b"/>
+                            <constraint firstItem="5Wy-0c-utE" firstAttribute="leading" secondItem="XzW-5B-iDv" secondAttribute="leading" constant="20" id="WP3-oo-zi9"/>
+                            <constraint firstItem="Ab4-Ea-Qm4" firstAttribute="leading" secondItem="XzW-5B-iDv" secondAttribute="leading" constant="144" id="Ycp-vt-UcI"/>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="trailing" secondItem="ora-S4-woI" secondAttribute="trailing" constant="20" id="ZXh-8n-17Z"/>
+                            <constraint firstItem="oxh-Ja-UJT" firstAttribute="top" secondItem="1Uw-5v-ye2" secondAttribute="bottom" constant="30" id="bGb-I3-au4"/>
+                            <constraint firstItem="Xpc-6I-dwJ" firstAttribute="leading" secondItem="XzW-5B-iDv" secondAttribute="leading" constant="20" id="glU-Y5-x0B"/>
+                            <constraint firstItem="7ac-9d-SNK" firstAttribute="top" secondItem="oxh-Ja-UJT" secondAttribute="bottom" constant="30" id="i1A-Ek-1fg"/>
+                            <constraint firstItem="5Wy-0c-utE" firstAttribute="top" secondItem="XzW-5B-iDv" secondAttribute="top" constant="30" id="pnd-xz-fNE"/>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="trailing" secondItem="1Uw-5v-ye2" secondAttribute="trailing" constant="20" id="sKf-nT-WM7"/>
+                            <constraint firstItem="XzW-5B-iDv" firstAttribute="trailing" secondItem="7ac-9d-SNK" secondAttribute="trailing" constant="20" id="xth-bc-GmV"/>
+                            <constraint firstItem="1Uw-5v-ye2" firstAttribute="top" secondItem="Xpc-6I-dwJ" secondAttribute="bottom" constant="30" id="zgu-4P-69t"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CHD-YE-Bzb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FE1-qQ-nqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2052.6717557251909" y="-35.211267605633807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ol5-Bc-GS3">
@@ -92,6 +195,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var addGameButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
     
     var games: [Game] = [
@@ -28,6 +30,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        addGameButton.layer.cornerRadius = addGameButton.frame.size.width / 2
+        view.bringSubviewToFront(addGameButton)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
+        ])
     }
     
     func setupUI() {
