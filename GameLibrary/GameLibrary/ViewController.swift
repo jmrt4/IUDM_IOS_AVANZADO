@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var addGameButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
     
@@ -29,6 +28,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
         ])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
+        collectionView.addGestureRecognizer(tapGesture)
     }
     
     func setupUI() {
@@ -80,15 +82,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return headerView
     }
     
-    func addGame(_ game: Game) {
-        games.append(game)
-        gameManager.saveGames(games)
-        collectionView.reloadData()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
+    }
+    
+    @objc func handleCellTap(_ gesture: UITapGestureRecognizer) {
+        let location = gesture.location(in: collectionView)
+        
+        if let indexPath = collectionView.indexPathForItem(at: location) {
+            let selectedGame = filteredGames(forSection: indexPath.section)[indexPath.item]
+            
+            let datailStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+            if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+                detailViewController.game = selectedGame
+                navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        }
     }
     
 }

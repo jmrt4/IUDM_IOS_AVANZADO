@@ -16,6 +16,7 @@
 		C72BCED42CF23DE600FD0757 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72BCED32CF23DE600FD0757 /* Game.swift */; };
 		C72BCED62CF255C700FD0757 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72BCED52CF255C700FD0757 /* Section.swift */; };
 		C74EFF5C2CF7D65000110664 /* AddGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74EFF5B2CF7D65000110664 /* AddGameViewController.swift */; };
+		C7552F752CF9F7D900C57A2F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7552F742CF9F7D900C57A2F /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		C72BCED32CF23DE600FD0757 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		C72BCED52CF255C700FD0757 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		C74EFF5B2CF7D65000110664 /* AddGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGameViewController.swift; sourceTree = "<group>"; };
+		C7552F742CF9F7D900C57A2F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				C71506A22CF1E13400B87B07 /* SceneDelegate.swift */,
 				C71506A42CF1E13400B87B07 /* ViewController.swift */,
 				C71506A62CF1E13400B87B07 /* Main.storyboard */,
+				C7552F742CF9F7D900C57A2F /* DetailViewController.swift */,
 				C71506A92CF1E13700B87B07 /* Assets.xcassets */,
 				C71506AB2CF1E13700B87B07 /* LaunchScreen.storyboard */,
 				C71506AE2CF1E13700B87B07 /* Info.plist */,
@@ -153,6 +156,7 @@
 				C71506A12CF1E13400B87B07 /* AppDelegate.swift in Sources */,
 				C71506A32CF1E13400B87B07 /* SceneDelegate.swift in Sources */,
 				C72BCED42CF23DE600FD0757 /* Game.swift in Sources */,
+				C7552F752CF9F7D900C57A2F /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

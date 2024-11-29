@@ -63,7 +63,7 @@ class AddGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         let newGame = Game(title: title, coverImage: cover, description: description, developer: developer, status: statusSelector.currentTitle!, category: Category.allCases[categoryGame.selectedRow(inComponent: 0)])
         
-        var gameManager = GameManager()
+        let gameManager = GameManager()
         
         var games = gameManager.loadGames()
         games.append(newGame)
