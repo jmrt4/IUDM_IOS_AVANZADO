@@ -16,14 +16,41 @@ class AddGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet var categoryGame: UIPickerView!
     @IBOutlet var statusSelector: UIButton!
     
+    var game: Game?
+    
     let status = ["Pendientes", "Jugando", "Completados"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        if game == nil {
+            setupUIAdd()
+        } else {
+            setupUIModify()
+        }
     }
     
-    private func setupUI() {
+    private func setupUIModify() {
+        view.backgroundColor = .systemBackground
+        title = "Añadir Juego"
+        
+        categoryGame.delegate = self
+        categoryGame.dataSource = self
+        
+        let actionPending = UIAction(title: status[0]) {_ in }
+        let actionCurrent = UIAction(title: status[1]) {_ in }
+        let actionComplete = UIAction(title: status[2]) {_ in }
+        
+        statusSelector.menu = UIMenu(title: "Estado", children: [actionPending,actionCurrent,actionComplete])
+        statusSelector.showsMenuAsPrimaryAction = true
+        
+        textGame.text = game?.title
+        textDeveloper.text = game?.developer
+        textDescription.text = game?.description
+        imageCover.text = game?.coverImage
+        
+    }
+    
+    private func setupUIAdd() {
         view.backgroundColor = .systemBackground
         title = "Añadir Juego"
         
@@ -66,10 +93,13 @@ class AddGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         let gameManager = GameManager()
         
         var games = gameManager.loadGames()
+        if let deleteGame = game {
+            games.removeAll(where: { $0.title == deleteGame.title })
+        }
+        
         games.append(newGame)
         gameManager.saveGames(games)
         
         navigationController?.popViewController(animated: true)
     }
-
 }

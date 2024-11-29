@@ -30,7 +30,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         ])
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_ :)))
         collectionView.addGestureRecognizer(tapGesture)
+        collectionView.addGestureRecognizer(longPressGesture)
     }
     
     func setupUI() {
@@ -97,6 +99,44 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
                 detailViewController.game = selectedGame
                 navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        }
+    }
+    
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            let location = gesture.location(in: collectionView)
+            
+            if let indexPath = collectionView.indexPathForItem(at: location) {
+                let alert = UIAlertController(title: "¿Que deseas hacer?", message: nil, preferredStyle: .alert)
+                let selectedGame = self.filteredGames(forSection: indexPath.section)[indexPath.item]
+                
+                let deleteAction = UIAlertAction(title: "Eliminar", style: .destructive) { _ in
+                    
+                    if let gameIndex = self.games.firstIndex(where: { $0.title == selectedGame.title }) {
+                        self.games.remove(at: gameIndex)
+                    }
+                    
+                    self.collectionView.performBatchUpdates({
+                        self.collectionView.deleteItems(at: [indexPath])
+                    }, completion: nil)
+                    
+                    self.gameManager.saveGames(self.games)
+                }
+                let modifyAction = UIAlertAction(title: "Modificar", style: .default) { _ in
+                    let addGameStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+                    if let addViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddGameViewController") as? AddGameViewController {
+                        addViewController.game = selectedGame
+                        self.navigationController?.pushViewController(addViewController, animated: true)
+                    }
+                }
+                let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+                
+                alert.addAction(deleteAction)
+                alert.addAction(modifyAction)
+                alert.addAction(cancelAction)
+                
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

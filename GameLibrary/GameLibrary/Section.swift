@@ -52,18 +52,15 @@ class GameCell: UICollectionViewCell {
         imageView.image = UIImage(systemName: "photo")
         
         guard let url = URL(string: game.coverImage) else {
-            print("1")
             return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
-                print("2")
                 return
             }
             
             guard let data = data, let image = UIImage(data: data) else {
-                print("3")
                 return
             }
             
