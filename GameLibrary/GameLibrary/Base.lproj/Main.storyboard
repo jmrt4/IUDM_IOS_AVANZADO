@@ -19,9 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-3Q-QBO">
-                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-3Q-QBO">
+                                <rect key="frame" x="0.0" y="147" width="393" height="671"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NMw-yQ-NEh">
                                     <size key="itemSize" width="128" height="128"/>
@@ -56,9 +55,11 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kiF-4X-C6r">
-                                <rect key="frame" x="305" y="743" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kiF-4X-C6r">
+                                <rect key="frame" x="327" y="743" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Zoa-gW-7Ud"/>
+                                </constraints>
                                 <buttonConfiguration key="configuration" style="filled" imagePlacement="top">
                                     <imageReference key="image" image="plus" catalog="system" variableValue="0.0"/>
                                 </buttonConfiguration>
@@ -66,14 +67,37 @@
                                     <segue destination="jac-6z-lh3" kind="show" id="WRc-Zt-oZD"/>
                                 </connections>
                             </button>
+                            <searchBar clipsSubviews="YES" contentMode="redraw" placeholder="Escribe el nombre del juego" translatesAutoresizingMaskIntoConstraints="NO" id="LjC-Mc-dbm">
+                                <rect key="frame" x="0.0" y="103" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="9I7-QC-Adc"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Yfe-rQ-J2x"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LjC-Mc-dbm" firstAttribute="trailing" secondItem="DIu-3Q-QBO" secondAttribute="trailing" id="2Tz-KE-lWp"/>
+                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="top" secondItem="LjC-Mc-dbm" secondAttribute="bottom" id="3UM-JN-EHn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kiF-4X-C6r" secondAttribute="bottom" constant="25" id="3vm-md-L3V"/>
+                            <constraint firstItem="kiF-4X-C6r" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="5FJ-DJ-hln"/>
+                            <constraint firstItem="LjC-Mc-dbm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FTg-Ok-d2n"/>
+                            <constraint firstItem="LjC-Mc-dbm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mT2-kh-Kwk"/>
+                            <constraint firstItem="DIu-3Q-QBO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="plF-w9-umr"/>
+                            <constraint firstItem="kiF-4X-C6r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="327" id="v9S-cM-yFN"/>
+                            <constraint firstItem="LjC-Mc-dbm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wKM-cT-TZc"/>
+                            <constraint firstItem="LjC-Mc-dbm" firstAttribute="leading" secondItem="DIu-3Q-QBO" secondAttribute="leading" id="yBs-O8-0nR"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zg4-cX-uyJ"/>
                     <connections>
                         <outlet property="addGameButton" destination="kiF-4X-C6r" id="ZEx-58-J3K"/>
                         <outlet property="collectionView" destination="DIu-3Q-QBO" id="kWB-Dt-Ay6"/>
+                        <outlet property="searchBar" destination="LjC-Mc-dbm" id="sQq-7w-Rta"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -195,7 +219,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEr-fw-43O">
-                                <rect key="frame" x="240" y="416" width="103" height="21"/>
+                                <rect key="frame" x="240" y="415.66666666666669" width="103" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="103" id="ghY-OC-Lcw"/>
                                 </constraints>

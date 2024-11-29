@@ -7,12 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     @IBOutlet var addGameButton: UIButton!
+    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var collectionView: UICollectionView!
     
     var games: [Game] = []
+    var filterGames: [Game] = []
     
     private let gameManager = GameManager()
     
@@ -21,12 +23,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         games = gameManager.loadGames()
+        filterGames = games
         setupUI()
         addGameButton.layer.cornerRadius = addGameButton.frame.size.width / 2
+        searchBar.delegate = self
+        view.bringSubviewToFront(searchBar)
         view.bringSubviewToFront(addGameButton)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
         ])
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCellTap(_:)))
@@ -59,7 +64,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func filteredGames(forSection section: Int)  -> [Game] {
-        return games.filter { $0.status == status[section] }
+        return filterGames.filter { $0.status == status[section] }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -141,5 +146,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filterGames = games
+        } else {
+            filterGames = games.filter { $0.title.lowercased().contains(searchText.lowercased()) }
+        }
+        collectionView.reloadData()
+    }
 }
 
